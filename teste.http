@@ -12,3 +12,15 @@ GET http://localhost:8080/veiculos/1
 
 ### deletar
 DELETE http://localhost:8080/veiculos/1
+
+### atualizar (PUT) - manda tudo
+PUT http://localhost:8080/veiculos/1
+Content-Type: application/json
+
+{ "placa": "ABC1D23", "modelo": "Gol G5", "ano": 2021 }
+
+### atualizar parcial (PATCH) - só o ano
+PATCH http://localhost:8080/veiculos/1
+Content-Type: application/json
+
+{ "ano": 2022 }

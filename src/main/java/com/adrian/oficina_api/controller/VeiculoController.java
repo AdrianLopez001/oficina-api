@@ -25,5 +25,14 @@ public class VeiculoController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long id) { service.deletar(id); }
+
+    @PutMapping("/{id}")
+    public Veiculo atualizar(@PathVariable Long id, @RequestBody Veiculo dados) {
+        return service.atualizar(id, dados);
+    }
     
+    @PatchMapping("/{id}")
+    public Veiculo atualizarParcial(@PathVariable Long id, @RequestBody Veiculo dados) {
+        return service.atualizarParcial(id, dados);
+    }
 }

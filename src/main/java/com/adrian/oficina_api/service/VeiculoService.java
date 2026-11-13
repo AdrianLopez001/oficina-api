@@ -30,5 +30,36 @@ public class VeiculoService {
         buscar(id);
         repo.deleteById(id);
     }
+
+    public Veiculo atualizar(Long id, Veiculo dados) {
+        Veiculo v = buscar(id);
+        validarPlaca(v, dados.getPlaca());
+
+        v.setPlaca(dados.getPlaca());
+        v.setModelo(dados.getModelo());
+        v.setAno(dados.getAno());
+        return repo.save(v);
+    }
+
+    public Veiculo atualizarParcial(Long id, Veiculo dados) {
+        Veiculo v = buscar(id);
+
+        if (dados.getPlaca() != null) {
+            validarPlaca(v, dados.getPlaca());
+            v.setPlaca(dados.getPlaca());
+        }
+        if (dados.getModelo() != null) v.setModelo(dados.getModelo());
+        if (dados.getAno() != null) v.setAno(dados.getAno());
+
+        return repo.save(v);
+
+    }
+
+    private void validarPlaca(Veiculo atual, String novaPlaca) {
+        boolean mudouPlaca = !atual.getPlaca().equalsIgnoreCase(novaPlaca);
+        if (mudouPlaca && repo.existsByPlacaIgnoreCase(novaPlaca)){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Placa ja cadastrada.");
+        }
+    }
     
 }
