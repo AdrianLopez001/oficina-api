@@ -1,0 +1,14 @@
+### listar
+GET http://localhost:8080/veiculos
+
+### cadastrar
+POST http://localhost:8080/veiculos
+Content-Type: application/json
+
+{ "placa": "ABC1D23", "modelo": "Gol", "ano": 2020 }
+
+### buscar 
+GET http://localhost:8080/veiculos/1
+
+### deletar
+DELETE http://localhost:8080/veiculos/1
